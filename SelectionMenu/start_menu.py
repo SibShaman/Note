@@ -2,7 +2,7 @@
 # сохранять её, читать список заметок, редактировать заметку, удалять заметку.
 
 from SelectionMenu.Note import Note
-from SelectionMenu.manage import write_data, show_data, read_data
+from SelectionMenu.manage import write_data, show_data, read_data, changed_data
 
 FILE_NAME = 'SelectionMenu/note.csv'
 
@@ -33,10 +33,16 @@ def command_menu():
             note.find_entry(read_file)
 
         elif in_com == '4':
-            pass
+            read_file = read_data(FILE_NAME)  # читаем файл, если он создан, смотрим список записей для получения id
+            note = Note(read_file)
+            new_list_in_file = note.change_entry(read_file)
+            changed_data(new_list_in_file, FILE_NAME)
 
         elif in_com == '5':
-            pass
+            read_file = read_data(FILE_NAME)  # читаем файл, если он создан, смотрим список записей для получения id
+            note = Note(read_file)
+            new_list_in_file = note.delete_entry(read_file)
+            changed_data(new_list_in_file, FILE_NAME)
 
         elif in_com == '0':
             break

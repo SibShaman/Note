@@ -28,15 +28,29 @@ class Note:
 
     @staticmethod
     def change_entry(my_list):
-        pass
+        text = input('Введите id заметки или заголовок: ')
+        find_el = [x for x in my_list if (x['id'] == text or x['title'] == text)]
+        for i in range(len(my_list)):
+            if my_list[i]['id'] == find_el[0]['id']:
+                my_list[i]['title'] = input('Введите заголовок: \n')
+                my_list[i]['description'] = input('Введите текст заметки: \n')
+                my_list[i]['date'] = datetime.now()
+        return my_list
 
     @staticmethod
     def find_entry(my_list):
-        pass
+        text = input('Введите id заметки или заголовок: ')
+        print([x if (x['id'] == text or x['title'] == text) else 'not found' for x in my_list])
 
     @staticmethod
     def delete_entry(my_list):
-        pass
+        text = input('Введите id заметки или заголовок: ')
+        find_el = [x for x in my_list if (x['id'] == text or x['title'] == text)]
+        for i in range(len(my_list)):
+            if my_list[i]['id'] == find_el[0]['id']:
+                del my_list[i]
+                break
+        return my_list
 
     @staticmethod
     def save_entry(my_list):
